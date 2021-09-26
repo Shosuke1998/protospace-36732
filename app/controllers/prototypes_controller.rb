@@ -24,7 +24,6 @@ class PrototypesController < ApplicationController
     @comment = Comment.new
     @prototype = Prototype.find(params[:id])
     @comments = @prototype.comments.includes(:user)
-    
   end
 
   def edit
@@ -45,20 +44,16 @@ class PrototypesController < ApplicationController
     prototype.destroy
     redirect_to root_path
   end
-  
 
+  private
 
-  private 
   def prototype_params
-    params.require(:prototype).permit(:title,:catch_copy,:concept,:image).merge(user_id: current_user.id)
+    binding.pry
+    params.require(:prototype).permit(:title, :catch_copy, :concept, :image).merge(user_id: current_user.id)
   end
 
   def move_to_index
     prototype = Prototype.find(params[:id])
-    unless current_user.id == prototype.user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless current_user.id == prototype.user_id
   end
-
-end 
-
+end

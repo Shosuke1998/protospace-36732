@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2021_08_27_025749) do
     t.text "text"
     t.bigint "user_id", null: false
     t.bigint "prototype_id", null: false
+    t.integer "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["prototype_id"], name: "index_comments_on_prototype_id"
